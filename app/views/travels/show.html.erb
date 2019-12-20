@@ -1,0 +1,34 @@
+<div class="container-fluid py-3">
+  <p id="notice"><%= notice %></p>
+  <div class="card-deck">
+    <div class="card border-info mb-3" style="max-width: 18rem;">
+      <div class="card-header card-title text-info"><strong>Contract #<%= @travel.id %></strong></div>
+      <div class="card-body text-info">
+        <h5 class="card-title">Contract</h5>
+        <li class="list-group-item"><strong>Time: </strong><%= @travel.time %></li>
+        <li class="list-group-item"><strong>Distance: </strong><%= @travel.distance %></li>
+        <li class="list-group-item"><strong>Value: </strong><%= @travel.value %></li>
+      </div>
+    </div>
+    <div class="card border-info mb-3" style="max-width: 18rem;">
+      <div class="card-header card-title text-info"><strong>Contract #<%= @travel.id %></strong></div>
+      <div class="card-body text-info">
+        <h5 class="card-title">User</h5>
+        <li class="list-group-item"><strong>Identification:</strong><%= @travel.user_identification %></li>
+        <li class="list-group-item"><strong>Phone: </strong><%= @travel.user_phone %></li>
+        <li class="list-group-item"><strong>Email: </strong><%= @travel.user_email %></li>
+      </div>
+    </div>
+    <div class="card border-info mb-3" style="max-width: 18rem;">
+      <div class="card-header card-title text-info"><strong>Contract #<%= @travel.id %></strong></div>
+      <div class="card-body text-info">
+        <h5 class="card-title">Driver</h5>
+        <li class="list-group-item"><strong>Identification: </strong><%= @travel.user.owner_identification %></li>
+        <li class="list-group-item"><strong>Phone: </strong><%= @travel.user.owner_phone %></li>
+        <li class="list-group-item"><strong>Email: </strong><%= @travel.user.email %></li>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Edit', edit_travel_path(@travel), class:"btn btn-outline-primary", title:"Edit" %>
+  <%= link_to 'Back', travels_path, class:"btn btn-outline-info", title:"Back" %>
+</div>

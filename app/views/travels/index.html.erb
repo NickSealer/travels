@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<div class="container-fluid py-3">
+  <div class="card text-center">
+    <div class="card-header">
+      <h1>Travels</h1>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover table-responsive-xl table-striped">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Distance</th>
+            <th>Value</th>
+            <th>User identification</th>
+            <th>User phone</th>
+            <th>User email</th>
+            <th>Driver</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% (current_user.role == "manager") ? @admin_travels.each : @travels.each do |travel| %>
+          <tr>
+            <td><%= travel.time %></td>
+            <td><%= travel.distance %></td>
+            <td><%= travel.value %></td>
+            <td><%= travel.user_identification %></td>
+            <td><%= travel.user_phone %></td>
+            <td><%= travel.user_email %></td>
+            <td><%= travel.user.email %></td>
+            <td><%= link_to 'Update', edit_travel_path(travel), class: 'btn btn-outline-primary', title:"Update" %></td>
+            <td><%= link_to 'Show', travel, class: 'btn btn-outline-primary', title:"Show" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="digg_pagination">
+        <%= will_paginate (current_user.role == "manager") ? @admin_travels : @travels, :container => false %>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'New Travel', new_travel_path, class: 'btn btn-outline-success', title:"New Travel" %>
+  </div>
+</div>

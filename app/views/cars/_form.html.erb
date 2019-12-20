@@ -1,0 +1,42 @@
+<%= form_with(model: car, local: true) do |form| %>
+<% if car.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+  <ul>
+    <% car.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="card border-info mb-3">
+  <div class="card-body text-info">
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :model %>
+        <%= form.text_field :model, required: true, class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="field ">
+        <%= form.label :brand %>
+        <%= form.select(:brand, options_for_select([ ['Renault'], ['Chevrolet'], ['Mazda'], ['Honda'], ['Ford'], ['Nissan'], ['Dodge'] ]), class: "form-control") %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <% if car.avatar.attached? %>
+      <strong>Image:</strong>
+      <div class="">
+        <%= image_tag car.avatar, class:'rounded', alt:@car.model, title:@car.model, width:500 %>
+      </div>
+      <% end %>
+      <br>
+      <div class="field">
+        <%= form.file_field :avatar%>
+      </div>
+    </li><br>
+      <button type="submit" class="btn btn-outline-success">Save</button>
+  </div>
+</div>
+<% end %>

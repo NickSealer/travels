@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @car.model %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @car.brand %>
+</p>
+
+<%= link_to 'Edit', edit_car_path(@car), class:"btn btn-outline-success", title:"Edit" %> |
+<%= link_to 'Back', cars_path, class: "btn btn-outline-info", title:"Back"%>

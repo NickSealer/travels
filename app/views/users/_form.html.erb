@@ -1,0 +1,78 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card border-info mb-3">
+    <div class="card-body text-info">
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Name" %>
+          <%= form.text_field :name, required: true, class:"form-control" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Apellildo" %>
+          <%= form.text_field :lastname, required: true, class:"form-control" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Identification" %>
+          <%= form.text_field :owner_identification, required: true, class:"form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Card Property" %>
+          <%= form.text_field :owner_card_property, required: true, class:"form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "License" %>
+          <%= form.text_field :owner_license, required: true, class:"form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Email" %>
+          <%= form.email_field :email, required: true, class:"form-control" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Phone" %>
+          <%= form.text_field :owner_phone, required: true, class:"form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="field">
+          <%= form.label "Address" %>
+          <%= form.text_field :owner_address, required: true, class:"form-control" %>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <% if @user.avatar.attached? %>
+        <strong>Image:</strong>
+        <div class="">
+          <%= image_tag @user.avatar, class:'rounded', alt:@user.name, title:@user.name, width:500 %>
+        </div><br>
+        <% end %>
+        <div class="field">
+          <%= form.file_field :avatar%>
+        </div>
+      </li><br>
+      <button type="submit" class="btn btn-outline-success">Save</button>
+    </div>
+  </div>
+<% end %>

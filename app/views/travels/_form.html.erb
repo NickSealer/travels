@@ -1,0 +1,54 @@
+<%= form_with(model: travel, local: true) do |form| %>
+<% if travel.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(travel.errors.count, "error") %> prohibited this travel from being saved:</h2>
+
+  <ul>
+    <% travel.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="card border-info mb-3">
+  <div class="card-body text-info">
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :time %>
+        <%= form.text_field :time, required: true, class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :distance %>
+        <%= form.text_field :distance, required: true, class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :value %>
+        <%= form.text_field :value, required: true, class: "form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :user_identification %>
+        <%= form.text_field :user_identification, required: true, class: "form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :user_phone %>
+        <%= form.text_field :user_phone, required: true, class: "form-control", onkeypress:"if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="field">
+        <%= form.label :user_email %>
+        <%= form.email_field :user_email, required: true, class: "form-control" %>
+      </div>
+    </li><br>
+    <button type="submit" class="btn btn-outline-success">Save</button>
+  </div>
+</div>
+<% end %>

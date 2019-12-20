@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid py-3">
+  <div class="card text-center">
+    <div class="card-header">
+      <h1>My cars</h1>
+      <% if current_user.owner_license.nil? %>
+      <p>Remember to start travels, first you need update your profile</p>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover table-responsive-xl table-striped">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Brand</th>
+            <th>Picture</th>
+            <th colspan="3" width="25%"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @cars.each do |car| %>
+            <tr>
+              <td><%= car.model %></td>
+              <td><%= car.brand %></td>
+              <% if car.avatar.attached? %>
+              <td><%= image_tag car.avatar, class:'rounded', alt:car.model, title:car.model, width:100, height:50 %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+              <% if current_user.owner_license != nil %>
+              <td><%= link_to 'Start Service', new_travel_path, class: 'btn btn-outline-success', title:"Start Service" %></td>
+              <% end %>
+              <td><%= link_to 'Edit', edit_car_path(car), class: 'btn btn-outline-primary', title:"Edit" %></td>
+              <td><%= link_to 'Delete', car, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', title:"Delete" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="digg_pagination">
+        <%= will_paginate @cars, :container => false %>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Register My Car', new_car_path, class: 'btn btn-outline-success', title:"Register My Car" %>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<div class="container-fluid py-3">
+  <div class="card text-center">
+    <div class="card-header">
+<h1>Users</h1>
+</div>
+<div class="card-body">
+  <table class="table table-hover table-responsive-xl table-striped">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Role</th>
+      <th>Name</th>
+      <th>CC</th>
+      <th>Card</th>
+      <th>License</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.role %></td>
+        <td><%= link_to "#{user.name} #{  user.lastname}", edit_user_path(user), title: "Show #{user.email}" %></td>
+        <td><%= user.role == 'User' ? user.identification : user.owner_identification %></td>
+        <td><%= user.owner_card_property ? user.owner_card_property : 'NA'%></td>
+        <td><%= user.owner_license ? user.owner_license : 'NA' %></td>
+        <td><%= user.role == 'User' ? Travel.find_by(user_identification: user.identification).user_email : user.email %></td>
+        <td><%= user.role == 'User' ? user.phone : user.owner_phone %></td>
+        <td><%= user.role == 'User' ? 'NA' : user.owner_address %></td>
+        <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger', title:"Delete" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+  <div class="digg_pagination">
+    <%= will_paginate @users, :container => false %>
+  </div>
+</div>
+</div>
+</div>
